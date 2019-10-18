@@ -13,8 +13,8 @@ letters = { 1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: '
 21: 'u', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z', 27: '-'}
 
 # Define the upper and lower boundaries for a color to be considered "Blue"
-blueLower = np.array([100, 60, 60])
-blueUpper = np.array([140, 255, 255])
+yellowLower = np.array([255,255,49])
+yellowUpper = np.array([230,226,0])
 
 # Define a 5x5 kernel for erosion and dilation
 kernel = np.ones((5, 5), np.uint8)
