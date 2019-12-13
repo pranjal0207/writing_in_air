@@ -5,22 +5,40 @@ import numpy as np
 import cv2
 import Pmw
 
+global c
+c  =0
+
 def start():
     global C, M, B, Q
+    global c
 
-    B.place_forget()
     C = tk.Button(mainWindow, text="Display CNN text file", command=cnn_disp)
-    C.place(anchor=tk.CENTER, relx=0.2, rely=0.9, width=150, height=50)
-    C.pack()
-    C.focus()
     M = tk.Button(mainWindow, text="Display MLP text file", command=mlp_disp)
-    M.place(anchor=tk.CENTER, relx=0.2, rely=0.9, width=150, height=50)
-    M.pack()
-    M.focus()
     Q = tk.Button(mainWindow, text="Quit", command=quit)
-    Q.place(anchor=tk.CENTER, relx=0.2, rely=0.9, width=150, height=50)
-    Q.pack()
-    Q.focus()
+    B = tk.Button(mainWindow, text="Start writing again", command=start)
+
+    if c == 0:
+        B.place_forget()
+        C.place(anchor=tk.CENTER, relx=0.2, rely=0.9, width=150, height=50)
+        C.pack()
+        C.focus()
+        M.place(anchor=tk.CENTER, relx=0.2, rely=0.9, width=150, height=50)
+        M.pack()
+        M.focus()
+        B.place(anchor=tk.CENTER, relx=0.2, rely=0.9, width=150, height=50)
+        B.pack()
+        B.focus()
+        Q.place(anchor=tk.CENTER, relx=0.2, rely=0.9, width=150, height=50)
+        Q.pack()
+        Q.focus()
+        c += 1
+
+    if c != 0 :
+        B.place_forget()
+        Q.place_forget()
+        M.place_forget()
+        C.place_forget()
+
 
     mlp_model = load_model('emnist_mlp_model.h5')
     cnn_model = load_model('emnist_cnn_model.h5')
@@ -49,8 +67,8 @@ def start():
     prediction1 = 26
     prediction2 = 26
 
-    flag1 = False;
-    flag2 = False;
+    flag1 = False
+    flag2 = False
 
     index = 0
 
@@ -174,6 +192,7 @@ def cnn_disp():
     text.pack()
     text.insert('end', open(filename, 'r').read())
 
+
 def mlp_disp():
     filename = "mlp_file.txt"
     text = Pmw.ScrolledText(mainWindow,
@@ -189,9 +208,9 @@ def mlp_disp():
     text.pack()
     text.insert('end', open(filename, 'r').read())
 
+
 mainWindow = tk.Tk(screenName = "Writing in Air")
 mainWindow.resizable(width=False, height=False)
-
 
 B = tk.Button(mainWindow, text ="Start", command = start)
 
